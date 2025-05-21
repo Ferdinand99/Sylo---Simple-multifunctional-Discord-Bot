@@ -79,7 +79,7 @@ npm run dev
 ```
 
 ## ➕ Adding New Commands
-Create a new file in the 'commands' directory and follow the structure of the existing commands.
+Create a new file in the `commands` directory and follow the structure of the existing commands.
 
 ## This project is licensed under the MIT License.
-See LICENSE for details.
+See [LICENSE](./LICENSE) for details.
