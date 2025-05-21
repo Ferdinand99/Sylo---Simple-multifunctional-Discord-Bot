@@ -1,92 +1,85 @@
-# Multi-Functional Discord Bot
+# ⚙️ Multi-Functional Discord Bot
 
-A powerful Discord bot built with discord.js that provides multiple functionalities including moderation, ticket system, reaction roles, and sticky messages.
+> A modern, modular Discord bot built with `discord.js`, offering moderation, ticketing, reaction roles, sticky messages, and utility commands — all in one streamlined package.
 
-## Features
+---
+
+## ✨ Features
 
 ### 🛡️ Moderation
-- **Ban Command**: Ban users with customizable message deletion duration (0-7 days)
-- **Kick Command**: Remove users from the server with a specified reason
-- **Timeout Command**: Temporarily mute users for a specified duration (minutes, hours, or days)
+- `/ban` – Ban users with optional message deletion (0–7 days)
+- `/kick` – Remove users with a reason
+- `/timeout` – Temporarily mute users (e.g., 10m, 1h, 1d)
 
 ### 🎫 Ticket System
-- **Ticket Creation**: Users can create support tickets with detailed descriptions
-- **Ticket Setup**: Administrators can set up the ticket system in designated channels
-- **Modal Interface**: User-friendly form for submitting ticket information
+- Create support tickets via an intuitive modal form
+- Admins can configure ticket channels and settings
+- Users can submit issues with detailed topics
 
 ### 🏷️ Reaction Roles
-- **Role Menu Creation**: Create interactive role selection menus
-- **Multiple Roles**: Support for up to 5 different roles per menu
-- **Exclusive Mode**: Option to allow users to select only one role or multiple roles
+- Create role menus with up to 5 assignable roles
+- Support for exclusive (single-role) and multi-role mode
 
 ### 📌 Sticky Messages
-- **Persistent Messages**: Messages that automatically repost in channels
-- **Customization**: Set custom titles, messages, and colors for sticky messages
-- **Easy Management**: Simple commands to set and remove sticky messages
+- Auto-reposting messages pinned to the bottom of a channel
+- Customizable title, color, and content
+- Easy `/sticky set` and `/sticky remove` commands
 
-### 🔧 Utility
-- **Help Command**: Displays all available commands organized by category
+### 🔧 Utilities
+- `/help` – List all available commands organized by category
 
-## Command Usage
+---
 
-### Moderation Commands
-```
-/ban [user] [reason] [days] - Ban a user with optional message deletion
-/kick [user] [reason] - Kick a user from the server
-/timeout [user] [duration] [reason] - Timeout a user (e.g., 10m, 1h, 1d)
-```
+## 🚀 Command Usage
 
-### Ticket Commands
-```
-/ticket create [topic] - Create a new support ticket
-/ticket setup - Set up the ticket system (Admin only)
-```
+```bash
+/ban [user] [reason] [days]
+/kick [user] [reason]
+/timeout [user] [duration] [reason]
 
-### Role Commands
-```
-/roles create [title] [description] [role1-5] [exclusive] - Create a role selection menu
-```
+/ticket create [topic]
+/ticket setup
 
-### Sticky Message Commands
-```
-/sticky set [message] [title] [color] - Set a sticky message
-/sticky remove - Remove the sticky message from the current channel
+/roles create [title] [description] [role1–5] [exclusive]
+
+/sticky set [message] [title] [color]
+/sticky remove
+
+/help
 ```
 
-### Utility Commands
-```
-/help - Display all available commands
-```
+## ⚙️ Setup
 
-## Setup
-
-1. Clone this repository
-2. Install dependencies:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/yourbot.git
+   cd yourbot
    ```
+
+2. Install dependencies:
+   ```bash
    npm install
    ```
-3. Copy `.env.example` to `.env` and fill in your bot token:
-   ```
+
+3. Configure your environment:
+   ```bash
    cp .env.example .env
+   # Then add your Discord bot token to .env
    ```
-4. Edit the `.env` file and add your Discord bot token
-5. Start the bot:
-   ```
+
+4. Start the bot
+   ```bash
    npm start
    ```
 
-## Development
-
-To run the bot in development mode with auto-restart:
-
-```
+## 🧪 Development Mode
+To run the bot with auto-restart during development:
+```bash
 npm run dev
 ```
 
-## Adding New Commands
+## ➕ Adding New Commands
+Create a new file in the 'commands' directory and follow the structure of the existing commands.
 
-Create a new file in the `commands` directory following the existing command structure.
-
-## License
-
-ISC
+## This project is licensed under the MIT License.
+See LICENSE for details.
