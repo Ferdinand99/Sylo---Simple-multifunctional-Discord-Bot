@@ -1,4 +1,4 @@
-# ⚙️ Multi-Functional Discord Bot
+# ⚙️ SYLO - A Multi-Functional Discord Bot
 
 > A modern, modular Discord bot built with `discord.js`, offering moderation, ticketing, reaction roles, sticky messages, and utility commands — all in one streamlined package.
 
