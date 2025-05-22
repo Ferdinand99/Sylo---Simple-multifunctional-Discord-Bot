@@ -31,7 +31,7 @@ module.exports = {
       const description = command.data.description;
       
       // Categorize based on command name or structure
-      if (name === 'ban' || name === 'kick' || name === 'timeout') {
+      if (name === 'ban' || name === 'kick' || name === 'timeout' || name === 'say') {
         moderationCommands.push(`**/${name}** - ${description}`);
       } else if (name === 'ticket') {
         ticketCommands.push(`**/${name}** - ${description}`);
