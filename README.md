@@ -11,6 +11,7 @@
 - `/kick` – Remove users with a reason
 - `/timeout` – Temporarily mute users (e.g., 10m, 1h, 1d)
 - `/say` – Send messages as the bot to any channel
+- `/clear` – Delete multiple messages from a channel (1-100)
 
 ### 🎫 Ticket System
 - Create support tickets via an intuitive modal form
@@ -38,6 +39,7 @@
 /kick [user] [reason]
 /timeout [user] [duration] [reason]
 /say [channel] [message]
+/clear [amount] [user]
 
 /ticket create [topic]
 /ticket setup
