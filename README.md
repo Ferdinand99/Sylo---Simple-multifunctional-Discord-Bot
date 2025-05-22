@@ -10,8 +10,13 @@
 - `/ban` – Ban users with optional message deletion (0–7 days)
 - `/kick` – Remove users with a reason
 - `/timeout` – Temporarily mute users (e.g., 10m, 1h, 1d)
+- `/warning` – Issue a warning to a user with a reason
+- `/warnings` – View warning history for a specific user
+- `/removewarning` – Remove a specific warning from a user
 - `/say` – Send messages as the bot to any channel
 - `/clear` – Delete multiple messages from a channel (1-100)
+
+All moderation actions are logged to a configured modlog channel.
 
 ### 🎫 Ticket System
 - Create support tickets via an intuitive modal form
@@ -38,6 +43,9 @@
 /ban [user] [reason] [days]
 /kick [user] [reason]
 /timeout [user] [duration] [reason]
+/warning [user] [reason]
+/warnings [user]
+/removewarning [user] [warning_id]
 /say [channel] [message]
 /clear [amount] [user]
 

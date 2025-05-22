@@ -19,6 +19,13 @@ client.commands = new Collection();
 client.tickets = new Collection();
 client.stickyMessages = new Map();
 
+// Create data directory for persistent storage if it doesn't exist
+const dataDir = path.join(__dirname, 'data');
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+  console.log('Created data directory for persistent storage');
+}
+
 // Load commands
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));

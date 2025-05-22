@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const { logModAction } = require('../features/moderation/modlogHandler');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -45,8 +46,16 @@ module.exports = {
     try {
       await interaction.guild.members.ban(targetUser, { deleteMessageDays: days, reason: `${reason} | Banned by ${interaction.user.tag}` });
       
-      // Log the ban in a moderation log channel (if configured)
-      // This would be implemented with an actual logging system
+      // Log the ban using the modlog handler
+      await logModAction(interaction.client, interaction.guild, {
+        type: 'ban',
+        moderator: interaction.user,
+        target: targetUser,
+        reason: reason,
+        additionalData: {
+          days: days
+        }
+      }).catch(console.error);
       
       return interaction.reply({ content: `Successfully banned ${targetUser.tag} for reason: ${reason}` });
     } catch (error) {

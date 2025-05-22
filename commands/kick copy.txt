@@ -34,11 +34,10 @@ module.exports = {
     if (interaction.member.roles.highest.position <= targetMember.roles.highest.position) {
       return interaction.reply({ content: 'You cannot kick this user as they have the same or higher role than you.', ephemeral: true });
     }
-
-    try {
-      // Perform the kick
+    
+    // Perform the kick
       await targetMember.kick(`${reason} | Kicked by ${interaction.user.tag}`);
-
+      
       // Log the kick using the modlog handler
       await logModAction(interaction.client, interaction.guild, {
         type: 'kick',
@@ -46,11 +45,11 @@ module.exports = {
         target: targetUser,
         reason: reason
       }).catch(console.error);
-
-      return interaction.reply({ content: `✅ Successfully kicked ${targetUser.tag}.\n📝 Reason: ${reason}` });
+      
+      return interaction.reply({ content: `Successfully kicked ${targetUser.tag} for reason: ${reason}` });
     } catch (error) {
       console.error(error);
-      return interaction.reply({ content: '❌ There was an error trying to kick this user.', ephemeral: true });
+      return interaction.reply({ content: 'There was an error trying to kick this user.', ephemeral: true });
     }
   },
 };
