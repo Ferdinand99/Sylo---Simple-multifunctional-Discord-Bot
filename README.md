@@ -10,6 +10,7 @@
 - `/ban` – Ban users with optional message deletion (0–7 days)
 - `/kick` – Remove users with a reason
 - `/timeout` – Temporarily mute users (e.g., 10m, 1h, 1d)
+- `/say` – Send messages as the bot to any channel
 
 ### 🎫 Ticket System
 - Create support tickets via an intuitive modal form
@@ -36,6 +37,7 @@
 /ban [user] [reason] [days]
 /kick [user] [reason]
 /timeout [user] [duration] [reason]
+/say [channel] [message]
 
 /ticket create [topic]
 /ticket setup
