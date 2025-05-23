@@ -4,6 +4,10 @@
 
 ---
 
+[![Invite SYLO to Your Server](https://img.shields.io/badge/Invite%20SYLO-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/oauth2/authorize?client_id=1374856793469227029)
+
+---
+
 ## ✨ Features
 
 ### 🛡️ Moderation
