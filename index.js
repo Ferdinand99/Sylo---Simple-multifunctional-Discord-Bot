@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Client, GatewayIntentBits, Collection, Events, REST, Routes } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
+const { startDashboard } = require('./dashboard/api');
 
 // Create a new client instance with necessary intents
 const client = new Client({
@@ -81,4 +82,12 @@ client.once(Events.ClientReady, async () => {
 });
 
 // Login to Discord with your client's token
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN)
+  .then(() => {
+    // Start the dashboard after the bot is logged in
+    startDashboard(client);
+    console.log('Dashboard server started!');
+  })
+  .catch(error => {
+    console.error('Error logging in:', error);
+  });

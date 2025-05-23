@@ -1,4 +1,30 @@
 const { ChannelType, PermissionFlagsBits, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder } = require('discord.js');
+const db = require('../../database/db');
+
+// Initialize tickets table
+async function initializeDatabase() {
+  try {
+    await db.run(`
+      CREATE TABLE IF NOT EXISTS tickets (
+        channel_id TEXT PRIMARY KEY,
+        guild_id TEXT NOT NULL,
+        user_id TEXT NOT NULL,
+        topic TEXT,
+        status TEXT NOT NULL,
+        claimed_by TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        closed_at TIMESTAMP,
+        closed_by TEXT
+      )
+    `);
+    console.log('Tickets table initialized');
+  } catch (error) {
+    console.error('Error initializing tickets table:', error);
+  }
+}
+
+// Initialize database on module load
+initializeDatabase();
 
 module.exports = {
   // Create a new ticket channel
@@ -58,15 +84,33 @@ module.exports = {
       // Send the welcome message to the ticket channel
       await ticketChannel.send({ embeds: [ticketEmbed], components: [buttons] });
       
-      // Store ticket information (would be in a database in a real implementation)
-      interaction.client.tickets.set(ticketChannel.id, {
+      // Store ticket information in database and cache
+      const ticketData = {
         userId: user.id,
         channelId: ticketChannel.id,
         topic: topic || 'Support Request',
         createdAt: new Date(),
         status: 'open',
         claimedBy: null
-      });
+      };
+
+      // Save to database
+      await db.run(`
+        INSERT INTO tickets (
+          channel_id, guild_id, user_id, topic, status, created_at
+        ) VALUES (?, ?, ?, ?, ?, ?)`,
+        [
+          ticketChannel.id,
+          guild.id,
+          user.id,
+          ticketData.topic,
+          'open',
+          ticketData.createdAt.toISOString()
+        ]
+      );
+
+      // Save to cache
+      interaction.client.tickets.set(ticketChannel.id, ticketData);
       
       // Reply to the user with the ticket channel link
       return ticketChannel;
@@ -123,12 +167,22 @@ module.exports = {
     await interaction.deferReply();
     
     try {
-      // Update ticket status
+      const now = new Date();
+
+      // Update database
+      await db.run(`
+        UPDATE tickets
+        SET status = 'closed',
+            closed_by = ?,
+            closed_at = ?
+        WHERE channel_id = ?`,
+        [interaction.user.id, now.toISOString(), interaction.channel.id]
+      );
+
+      // Update cache
       ticketData.status = 'closed';
       ticketData.closedBy = interaction.user.id;
-      ticketData.closedAt = new Date();
-      
-      // You would save the ticket data to a database here
+      ticketData.closedAt = now;
       
       // Send closing message
       await interaction.editReply({ content: `Ticket closed by ${interaction.user}. This channel will be deleted in 5 seconds.` });
