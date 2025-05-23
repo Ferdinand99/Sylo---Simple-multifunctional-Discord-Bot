@@ -41,7 +41,7 @@ All moderation actions are logged to a configured modlog channel.
 
 ---
 
-## 🌐 Web Dashboard
+## 🌐 Web Dashboard (Only available when you self-host the bot. ***For now***)
 
 SYLO includes a built-in web dashboard that launches automatically alongside the bot.
 
