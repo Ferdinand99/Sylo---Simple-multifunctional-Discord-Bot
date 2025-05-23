@@ -84,7 +84,7 @@ We may update this policy over time. Significant changes will be announced on ou
 
 For questions or data-related requests, contact us through:
 
-- Discord Support Server: Coming Soon
+- Discord Support Server: [Support server](https://discord.gg/46Z76eZJVt)
 
 ---
 
