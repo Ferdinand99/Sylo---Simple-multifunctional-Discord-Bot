@@ -1,6 +1,6 @@
 # ⚙️ SYLO - A Multi-Functional Discord Bot
 
-> A modern, modular Discord bot built with `discord.js`, offering moderation, ticketing, reaction roles, sticky messages, and utility commands — all in one streamlined package.
+> A modern, modular Discord bot built with `discord.js`, offering moderation, ticketing, reaction roles, sticky messages, and utility commands — now with a web dashboard for configuration and embed management.
 
 ---
 
@@ -14,7 +14,7 @@
 - `/warnings` – View warning history for a specific user
 - `/removewarning` – Remove a specific warning from a user
 - `/say` – Send messages as the bot to any channel
-- `/clear` – Delete multiple messages from a channel (1-100)
+- `/clear` – Delete multiple messages from a channel (1–100)
 
 All moderation actions are logged to a configured modlog channel.
 
@@ -34,6 +34,27 @@ All moderation actions are logged to a configured modlog channel.
 
 ### 🔧 Utilities
 - `/help` – List all available commands organized by category
+
+---
+
+## 🌐 Web Dashboard
+
+SYLO includes a built-in web dashboard that launches automatically alongside the bot.
+
+### 📍 Access
+- URL: `http://localhost:8124`
+- Launches with `index.js`
+- Requires Discord login via OAuth2
+
+### 🧩 Dashboard Features
+
+| Feature           | Status         | Description                                                             |
+|-------------------|----------------|-------------------------------------------------------------------------|
+| **Moderation**     | Coming Soon     | Enable/disable commands, manage logs and warnings                      |
+| **Reaction Roles** | Coming Soon     | Create and manage reaction role menus                                  |
+| **Sticky Messages**| ✅ Working      | Set and remove sticky messages with style customization                |
+| **Utilities**      | Coming Soon     | View command documentation and current config                          |
+| **Embed Builder**  | ✅ Working      | Build and send styled Discord embeds using a visual interface          |
 
 ---
 
