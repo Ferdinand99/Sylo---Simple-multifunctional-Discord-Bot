@@ -1,121 +1,126 @@
-Create a full-stack web dashboard for my existing Discord bot project coded in discord.js, using the following file structure:
+# 🌐 SYLO Dashboard Integration Instructions
 
-🎯 Key Requirements:
+This document outlines how to build a full-stack web dashboard for your existing Discord bot project (coded in `discord.js`) — fully integrated into the same project and launched alongside your bot.
 
-1. 🔧 Launch Dashboard Server:
+---
 
-- When I start the bot via `index.js`, also launch an Express-based API server on port `8124`
+## 🎯 Key Requirements
 
-- This dashboard API should live under a new folder called `dashboard/` and be tightly integrated
+### 1. 🔧 Launch Dashboard Server
 
-- Keep everything in the same project (no separate repo or server needed)
+- When running the bot via `index.js`, also launch an Express.js API server on **port `8124`**
+- The dashboard API should live inside a new folder: `dashboard/`
+- The dashboard is tightly coupled with the bot — **no separate repo or hosting required**
 
-2. 🧱 Tech Stack:
+---
 
-- SQLite for the database
+### 2. 🧱 Tech Stack
 
-- Express.js for the API backend (`dashboard/api.js`)
+- **SQLite** for the database (shared between bot and dashboard)
+- **Express.js** for the API backend → `dashboard/api.js`
+- **React** or plain HTML/CSS/JS for the frontend → `dashboard/public/`
+- **Static file serving** via Express for frontend
+- **REST API** used for frontend-backend communication
+- Dashboard available at: `http://localhost:8124`
 
-- React (or simple HTML/CSS/JS) for the frontend (`dashboard/public/`)
+---
 
-- Use REST API for communication between frontend and backend
+### 3. ✨ Dashboard Features
 
-- Serve frontend statically via Express (dashboard should be available at `http://localhost:8124`)
+Allow users to configure and control SYLO’s main features:
 
-3. ✨ Features to Control:
-
-From the dashboard, allow configuration and control of these bot features:
-
-🛡️ Moderation:
-
+#### 🛡️ Moderation
 - Enable/disable moderation commands per guild
-
 - Set the modlog channel (channel ID stored per guild)
-
 - View/add/remove warnings for users
+- Trigger actions like `/ban`, `/kick`, `/timeout`, `/say`
 
-- Trigger moderation actions like /ban, /kick, /timeout, /say
-
-🎫 Ticket System:
-
+#### 🎫 Ticket System
 - Configure ticket categories and channels
+- View and manage submitted tickets
 
-- View submitted tickets
-
-🏷️ Reaction Roles:
-
+#### 🏷️ Reaction Roles
 - Create menus with up to 5 roles
+- Toggle between exclusive and multi-role modes
 
-- Choose multi-role or single-role mode
-
-📌 Sticky Messages:
-
+#### 📌 Sticky Messages
 - Set/remove sticky messages per channel
+- Customize title, color, and content
 
-- Configure message title, color, and content
+#### 🧰 Utilities
+- Display help command overview
+- View current guild configuration
 
-🧰 Utilities:
+#### 🌈 Embed Builder
+- Build styled Discord embeds visually
+- Send them to any selected channel via the bot
 
-- Display `/help` command info
+---
 
-- Display current config for each guild
+### 4. 🔐 Authentication
 
-🌈 Embed Builder:
+- Use **Discord OAuth2** for secure user login
+- Only allow users to manage guilds where they have `MANAGE_GUILD` permission and the bot is present
 
-- Visual form to build Discord embeds
+---
 
-- Send embed to selected channel via bot
+### 5. 🗂️ Database (SQLite)
 
-4. 🔐 Authentication:
+Use the same SQLite database file across bot and dashboard. Extend the existing schema to support:
 
-- Use Discord OAuth2 for user login and session
+| Table Name           | Purpose                                     |
+|----------------------|---------------------------------------------|
+| `guild_settings`     | Per-guild modlog channel, feature toggles   |
+| `warnings`           | Stores issued warnings                     |
+| `tickets`            | Ticket data (guild ID, user, topic, status)|
+| `reaction_roles`     | Role/emoji config for reaction menus        |
+| `sticky_messages`    | Sticky content + channel association        |
 
-- Only show/manage servers where the user has `MANAGE_GUILD` and the bot is present
+---
 
-5. 🗂️ Database (SQLite):
+### 6. 🧪 Usage
 
-- Reuse or extend existing DB schema
+- Start both bot and dashboard by simply running:
 
-- Use shared SQLite connection across bot and dashboard
+```bash
+node index.js
+```
 
-- Tables:
+- The bot connects to Discord and the dashboard runs at `http://localhost:8124`
 
-- guild_settings (modlog channel, enabled features)
 
-- warnings (userId, guildId, reason, date)
+### 7. 🧰 Bonus
 
-- tickets (guildId, userId, topic, status)
+- Use an `.env` file to manage:
+  - Discord bot token
+  - Client ID, Client Secret
+  - Redirect URI (for OAuth2)
 
-- reaction_roles (guildId, messageId, roleId, exclusive)
+- Use Tailwind CSS for modern UI styling
 
-- sticky_messages (channelId, content, color, etc.)
+- Maintain a modular structure with separation between:
+  - Frontend (React or static HTML/CSS)
+  - Backend (API + Auth)
+  - Shared logic (e.g., DB access)
 
-6. 🧪 Usage:
+---
 
-- Launch everything by running `node index.js`
 
-- Bot and dashboard both run, with bot on Discord and dashboard on http://localhost:8124
+### 🚀 Final Output
 
-7. 🧰 Bonus:
+Extend your project to include the following structure:
 
-- Include an `.env` setup for Discord client ID, secret, and redirect URL
+```
+dashboard/
+├── api.js           # Express backend
+├── auth/            # Discord OAuth2 login
+├── public/          # Frontend (React or static)
+```
 
-- Tailwind CSS for clean styling
+Update index.js to:
 
-- Modular code structure, with clear separation between frontend, backend, and shared logic
+- Start the Discord bot
 
-🚀 Output:
+- Initialize and serve the dashboard on port 8124
 
-- Extend my current project structure with:
-
-- `dashboard/` folder containing:
-
-- `api.js` (Express backend with routes for each feature)
-
-- `public/` (HTML/React frontend files)
-
-- `auth/` (OAuth2 flow using Discord)
-
-- Adjust `index.js` to start both the bot and the dashboard server
-
-Provide the updated `index.js`, example API endpoints, and frontend routing logic.
+- Ensure that the SQLite database is shared between both components
