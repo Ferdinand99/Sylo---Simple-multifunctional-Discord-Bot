@@ -1,5 +1,8 @@
 # ⚙️ SYLO - A Multi-Functional Discord Bot
 
+![Sylo-logo med turkis robot](https://github.com/user-attachments/assets/89b200eb-7dd7-43af-9024-94b7bb765d52)
+
+
 > A modern, modular Discord bot built with `discord.js`, offering moderation, ticketing, reaction roles, sticky messages, and utility commands — now with a web dashboard for configuration and embed management.
 
 ---
