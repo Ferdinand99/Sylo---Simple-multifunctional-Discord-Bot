@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sylo Discord Bot Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script>
+    // Configure Babel with modern features but older syntax output
+    Babel.registerPreset('custom', {
+      presets: [
+        [Babel.availablePresets.es2015, {
+          loose: true
+        }],
+        [Babel.availablePresets.stage2],
+        [Babel.availablePresets.react]
+      ],
+      plugins: [
+        // Add support for optional chaining alternative
+        function optionalChainingPlugin() {
+          return {
+            visitor: {
+              OptionalMemberExpression(path) {
+                path.replaceWith(
+                  path.node.object &&
+                  path.node.object.type === 'Identifier' ?
+                  path.node.object + ' && ' + path.node.property :
+                  '(' + path.node.object + ' && ' + path.node.property + ')'
+                );
+              }
+            }
+          };
+        }
+      ]
+    });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div id="root"></div>
+
+  <!-- Load React hooks first -->
+  <script type="text/babel" data-preset="custom" src="/js/utils/hooks.js"></script>
+  
+  <!-- Utils -->
+  <script type="text/babel" data-preset="custom" src="/js/utils/api.js"></script>
+
+  <!-- Components -->
+  <script type="text/babel" data-preset="custom" src="/js/components/Navbar.js"></script>
+  <script type="text/babel" data-preset="custom" src="/js/components/Sidebar.js"></script>
+  <script type="text/babel" data-preset="custom" src="/js/components/GuildSelector.js"></script>
+  
+  <!-- Pages -->
+  <script type="text/babel" data-preset="custom" src="/js/pages/Login.js"></script>
+  <script type="text/babel" data-preset="custom" src="/js/pages/Dashboard.js"></script>
+  <script type="text/babel" data-preset="custom" src="/js/pages/Moderation.js"></script>
+  <script type="text/babel" data-preset="custom" src="/js/pages/Tickets.js"></script>
+  <script type="text/babel" data-preset="custom" src="/js/pages/ReactionRoles.js"></script>
+  <script type="text/babel" data-preset="custom" src="/js/pages/StickyMessages.js"></script>
+  <script type="text/babel" data-preset="custom" src="/js/pages/Utilities.js"></script>
+  <script type="text/babel" data-preset="custom" src="/js/pages/EmbedBuilder.js"></script>
+
+  <!-- Main App Component (load last) -->
+  <script type="text/babel" data-preset="custom" src="/js/App.js"></script>
+  
+  <!-- Initialize App -->
+  <script type="text/babel" data-preset="custom">
+    try {
+      console.log('Initializing dashboard...');
+      
+      // Ensure all required elements are present
+      const rootElement = document.getElementById('root');
+      if (!rootElement) {
+        throw new Error('Root element not found');
+      }
+
+      // Check if React and ReactDOM are loaded
+      if (!window.React || !window.ReactDOM) {
+        throw new Error('React or ReactDOM not loaded');
+      }
+
+      console.log('Starting render...');
+      ReactDOM.render(
+        React.createElement(ErrorBoundary, null,
+          React.createElement(App, null)
+        ),
+        rootElement,
+        function() {
+          console.log('Render complete');
+        }
+      );
+    } catch (error) {
+      console.error('Fatal error initializing dashboard:', error);
+      document.getElementById('root').innerHTML = `
+        <div class="min-h-screen flex items-center justify-center bg-gray-100">
+          <div class="bg-white p-8 rounded-lg shadow-md max-w-lg">
+            <h1 class="text-2xl font-bold text-red-600 mb-4">Failed to load dashboard</h1>
+            <div class="bg-red-50 border-l-4 border-red-400 p-4">
+              <pre class="text-sm text-red-700 whitespace-pre-wrap">${error.toString()}</pre>
+            </div>
+            <button
+              onclick="window.location.reload()"
+              class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

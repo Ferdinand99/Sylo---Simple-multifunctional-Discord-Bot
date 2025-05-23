@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const { logModAction } = require('../features/moderation/modlogHandler');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -66,15 +67,26 @@ module.exports = {
     }
     
     // Apply the timeout
-    try {
-      await targetMember.timeout(durationMs, `${reason} | Timed out by ${interaction.user.tag}`);
-      
-      // Format the duration for the response message
-      const formattedDuration = formatDuration(durationMs);
-      
-      return interaction.reply({ 
-        content: `Successfully timed out ${targetUser.tag} for ${formattedDuration}. Reason: ${reason}` 
-      });
+      try {
+        await targetMember.timeout(durationMs, `${reason} | Timed out by ${interaction.user.tag}`);
+        
+        // Format the duration for the response message
+        const formattedDuration = formatDuration(durationMs);
+        
+        // Log the timeout using the modlog handler
+        await logModAction(interaction.client, interaction.guild, {
+          type: 'timeout',
+          moderator: interaction.user,
+          target: targetUser,
+          reason: reason,
+          additionalData: {
+            duration: formattedDuration
+          }
+        }).catch(console.error);
+        
+        return interaction.reply({ 
+          content: `Successfully timed out ${targetUser.tag} for ${formattedDuration}. Reason: ${reason}` 
+        });
     } catch (error) {
       console.error('Error applying timeout:', error);
       return interaction.reply({ 

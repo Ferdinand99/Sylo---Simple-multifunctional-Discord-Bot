@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Client, GatewayIntentBits, Collection, Events, REST, Routes } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
+const { startDashboard } = require('./dashboard/api');
 
 // Create a new client instance with necessary intents
 const client = new Client({
@@ -18,6 +19,13 @@ const client = new Client({
 client.commands = new Collection();
 client.tickets = new Collection();
 client.stickyMessages = new Map();
+
+// Create data directory for persistent storage if it doesn't exist
+const dataDir = path.join(__dirname, 'data');
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+  console.log('Created data directory for persistent storage');
+}
 
 // Load commands
 const commandsPath = path.join(__dirname, 'commands');
@@ -74,4 +82,12 @@ client.once(Events.ClientReady, async () => {
 });
 
 // Login to Discord with your client's token
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN)
+  .then(() => {
+    // Start the dashboard after the bot is logged in
+    startDashboard(client);
+    console.log('Dashboard server started!');
+  })
+  .catch(error => {
+    console.error('Error logging in:', error);
+  });

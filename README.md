@@ -1,92 +1,129 @@
-# Multi-Functional Discord Bot
+# ⚙️ SYLO - A Multi-Functional Discord Bot
 
-A powerful Discord bot built with discord.js that provides multiple functionalities including moderation, ticket system, reaction roles, and sticky messages.
+> A modern, modular Discord bot built with `discord.js`, offering moderation, ticketing, reaction roles, sticky messages, and utility commands — now with a web dashboard for configuration and embed management.
 
-## Features
+---
+
+[![Invite SYLO to Your Server](https://img.shields.io/badge/Invite%20SYLO-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/oauth2/authorize?client_id=1374856793469227029)
+
+---
+
+## ✨ Features
 
 ### 🛡️ Moderation
-- **Ban Command**: Ban users with customizable message deletion duration (0-7 days)
-- **Kick Command**: Remove users from the server with a specified reason
-- **Timeout Command**: Temporarily mute users for a specified duration (minutes, hours, or days)
+- `/ban` – Ban users with optional message deletion (0–7 days)
+- `/kick` – Remove users with a reason
+- `/timeout` – Temporarily mute users (e.g., 10m, 1h, 1d)
+- `/warning` – Issue a warning to a user with a reason
+- `/warnings` – View warning history for a specific user
+- `/removewarning` – Remove a specific warning from a user
+- `/say` – Send messages as the bot to any channel
+- `/clear` – Delete multiple messages from a channel (1–100)
+
+All moderation actions are logged to a configured modlog channel.
 
 ### 🎫 Ticket System
-- **Ticket Creation**: Users can create support tickets with detailed descriptions
-- **Ticket Setup**: Administrators can set up the ticket system in designated channels
-- **Modal Interface**: User-friendly form for submitting ticket information
+- Create support tickets via an intuitive modal form
+- Admins can configure ticket channels and settings
+- Users can submit issues with detailed topics
 
 ### 🏷️ Reaction Roles
-- **Role Menu Creation**: Create interactive role selection menus
-- **Multiple Roles**: Support for up to 5 different roles per menu
-- **Exclusive Mode**: Option to allow users to select only one role or multiple roles
+- Create role menus with up to 5 assignable roles
+- Support for exclusive (single-role) and multi-role mode
 
 ### 📌 Sticky Messages
-- **Persistent Messages**: Messages that automatically repost in channels
-- **Customization**: Set custom titles, messages, and colors for sticky messages
-- **Easy Management**: Simple commands to set and remove sticky messages
+- Auto-reposting messages pinned to the bottom of a channel
+- Customizable title, color, and content
+- Easy `/sticky set` and `/sticky remove` commands
 
-### 🔧 Utility
-- **Help Command**: Displays all available commands organized by category
+### 🔧 Utilities
+- `/help` – List all available commands organized by category
 
-## Command Usage
+---
 
-### Moderation Commands
-```
-/ban [user] [reason] [days] - Ban a user with optional message deletion
-/kick [user] [reason] - Kick a user from the server
-/timeout [user] [duration] [reason] - Timeout a user (e.g., 10m, 1h, 1d)
+## 🌐 Web Dashboard (Only available when you self-host the bot. ***For now***)
+
+SYLO includes a built-in web dashboard that launches automatically alongside the bot.
+
+### 📍 Access
+- URL: `http://localhost:8124`
+- Launches with `index.js`
+- Requires Discord login via OAuth2
+
+### 🧩 Dashboard Features
+
+| Feature           | Status         | Description                                                             |
+|-------------------|----------------|-------------------------------------------------------------------------|
+| **Moderation**     | Coming Soon     | Enable/disable commands, manage logs and warnings                      |
+| **Reaction Roles** | Coming Soon     | Create and manage reaction role menus                                  |
+| **Sticky Messages**| ✅ Working      | Set and remove sticky messages with style customization                |
+| **Utilities**      | Coming Soon     | View command documentation and current config                          |
+| **Embed Builder**  | ✅ Working      | Build and send styled Discord embeds using a visual interface          |
+
+---
+
+## 🚀 Command Usage
+
+```bash
+/ban [user] [reason] [days]
+/kick [user] [reason]
+/timeout [user] [duration] [reason]
+/warning [user] [reason]
+/warnings [user]
+/removewarning [user] [warning_id]
+/say [channel] [message]
+/clear [amount] [user]
+
+/ticket create [topic]
+/ticket setup
+
+/roles create [title] [description] [role1–5] [exclusive]
+
+/sticky set [message] [title] [color]
+/sticky remove
+
+/help
 ```
 
-### Ticket Commands
-```
-/ticket create [topic] - Create a new support ticket
-/ticket setup - Set up the ticket system (Admin only)
-```
+## ⚙️ Setup
 
-### Role Commands
-```
-/roles create [title] [description] [role1-5] [exclusive] - Create a role selection menu
-```
-
-### Sticky Message Commands
-```
-/sticky set [message] [title] [color] - Set a sticky message
-/sticky remove - Remove the sticky message from the current channel
-```
-
-### Utility Commands
-```
-/help - Display all available commands
-```
-
-## Setup
-
-1. Clone this repository
-2. Install dependencies:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/yourbot.git
+   cd yourbot
    ```
+
+2. Install dependencies:
+   ```bash
    npm install
    ```
-3. Copy `.env.example` to `.env` and fill in your bot token:
-   ```
+
+3. Configure your environment:
+   ```bash
    cp .env.example .env
+   # Then add your Discord bot token to .env
    ```
-4. Edit the `.env` file and add your Discord bot token
-5. Start the bot:
-   ```
+
+4. Start the bot
+   ```bash
    npm start
    ```
 
-## Development
-
-To run the bot in development mode with auto-restart:
-
-```
+## 🧪 Development Mode
+To run the bot with auto-restart during development:
+```bash
 npm run dev
 ```
 
-## Adding New Commands
+## ➕ Adding New Commands
+Create a new file in the `commands` directory and follow the structure of the existing commands.
 
-Create a new file in the `commands` directory following the existing command structure.
+## 🔗 Useful Links
 
-## License
+- [Invite SYLO to Your Server](https://discord.com/oauth2/authorize?client_id=1374856793469227029)
+- [Terms of Service](./TERMS.md)
+- [Privacy Policy](./PRIVACY.md)
+- [Support Server](https://discord.gg/46Z76eZJVt)
 
-ISC
+## This project is licensed under the MIT License.
+See [LICENSE](./LICENSE) for details.
