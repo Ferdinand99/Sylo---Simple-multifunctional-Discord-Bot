@@ -84,7 +84,7 @@ These Terms of Service may be updated over time. Any changes will be posted on t
 
 If you have any questions or concerns about these terms, please contact us via:
 
-- Discord Support Server: Coming Soon
+- Discord Support Server: [Support Server](https://discord.gg/46Z76eZJVt)
 
 ---
 
