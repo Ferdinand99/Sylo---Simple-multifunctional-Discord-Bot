@@ -124,8 +124,8 @@ Create a new file in the `commands` directory and follow the structure of the ex
 ## 🔗 Useful Links
 
 - [Invite SYLO to Your Server](https://discord.com/oauth2/authorize?client_id=1374856793469227029)
-- [Terms of Service](./TERMS.md)
-- [Privacy Policy](./PRIVACY.md)
+- [Terms of Service](./Terms.md)
+- [Privacy Policy](./Privacy.md)
 - [Support Server](https://discord.gg/46Z76eZJVt)
 
 ## This project is licensed under the MIT License.
